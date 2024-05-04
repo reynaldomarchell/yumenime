@@ -1,11 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Search } from "./Search";
+import Search from "./search";
 
-export function Navbar() {
+export default function MainNav() {
   return (
     <>
-      <nav className="flex items-center justify-between border-b px-5 py-3">
+      <nav className="flex items-center justify-between border-b pb-3">
         <div className="flex space-x-5 md:space-x-7">
           <Image src="/yumenime-logo.png" width={70} height={23} alt="logo" />
           <Link
