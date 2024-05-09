@@ -3,7 +3,7 @@ import { TopAiring } from "@/components/top-airing";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col gap-2">
+    <div className="flex h-full w-full flex-col gap-2">
       <TopAiring />
     </div>
   );
