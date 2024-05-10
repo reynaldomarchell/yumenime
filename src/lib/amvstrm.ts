@@ -10,3 +10,12 @@ export async function getTrendingAnime() {
     throw new Error(err.message);
   }
 }
+
+export async function getPopularAnime() {
+  try {
+    const { data } = await axios.get(`${url}/popular`);
+    return data.results;
+  } catch (err: any) {
+    throw new Error(err.message);
+  }
+}

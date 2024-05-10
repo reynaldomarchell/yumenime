@@ -1,8 +1,19 @@
-export type ConsumetResponse<T> = {
-  currentPage: string;
-  hasNextPage: boolean;
-  results: T[];
+export type TrendingTypes = {
+  id: number;
+  title: {
+    romaji: string;
+  };
+  genres: string[];
+  description: string;
+  bannerImage: string | null;
+  coverImage: {
+    extraLarge: string;
+  };
 };
+export interface Search extends Omit<TrendingTypes, "genres"> {
+  releaseDate: string;
+  subOrDub: "sub" | "dub";
+}
 
 export type RecentTypes = {
   id: string;
@@ -10,42 +21,18 @@ export type RecentTypes = {
   episodeNumber: number;
   title: string;
   image: string;
-  url: string;
 };
 
-// export type Popular = {
-//   id: string;
-//   title: string;
-//   image: string;
-//   url: string;
-//   genres: string[];
-// };
-
-export type TrendingTypes = {
+export type PopularTypes = {
   id: number;
   status: string;
   title: {
-    userPreferred: string;
     romaji: string;
-    english: string;
-    native: string;
   };
-  genres: string[];
-  description: string;
-  format: string;
-  bannerImage: string | null;
   coverImage: {
     extraLarge: string;
-    large: string;
-    medium: string;
   };
-  season: string;
-  seasonYear: number;
 };
-export interface Search extends Omit<TrendingTypes, "genres"> {
-  releaseDate: string;
-  subOrDub: "sub" | "dub";
-}
 
 export type AnimeInfo = {
   totalEpisodes: number;
