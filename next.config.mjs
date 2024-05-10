@@ -2,7 +2,14 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['gogocdn.net'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'gogocdn.net',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
 };
 

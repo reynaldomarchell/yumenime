@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import axios from "axios";
 import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
@@ -11,38 +10,21 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { FaPlay } from "react-icons/fa";
-
-type Popular = {
-  id: string;
-  title: string;
-  image: string;
-  episodeId: string;
-  episodeNumber: number;
-  genres: string[];
-};
-
-const url = "https://yumenime-api2.vercel.app/anime/gogoanime/top-airing";
-
-async function getPopularAnime() {
-  try {
-    const { data } = await axios.get(url, { params: { page: 1 } });
-    return data;
-  } catch (err: any) {
-    throw new Error(err.message);
-  }
-}
+import { getPopularAnime } from "@/lib/consumet";
+import { Popular } from "@/types";
 
 export function TopAiring() {
   const plugin = useRef(Autoplay({ delay: 3000, stopOnInteraction: false }));
 
   const [popularAnime, setPopularAnime] = useState<Popular[]>([]);
+
   useEffect(() => {
     getPopularAnime().then((data) => {
-      setPopularAnime(data.results);
+      setPopularAnime(data);
     });
   }, []);
 
-  console.log(popularAnime);
+  // console.log(popularAnime);
 
   return (
     <Carousel
