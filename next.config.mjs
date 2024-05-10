@@ -5,7 +5,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'gogocdn.net',
+        hostname: '**.**',
         port: '',
         pathname: '/**',
       },

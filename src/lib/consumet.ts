@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const CONSUMET_URL = `${process.env.NEXT_PUBLIC_CONSUMET}`;
+const url = `${process.env.NEXT_PUBLIC_CONSUMET}`;
 
-export async function getPopularAnime() {
+export async function getRecentEpisode() {
   try {
-    const { data } = await axios.get(`${CONSUMET_URL}/top-airing`, {
-      params: { page: 1 },
+    const { data } = await axios.get(`${url}/recent-episodes`, {
+      params: { page: 1, type: 1 },
     });
     return data.results;
   } catch (err: any) {

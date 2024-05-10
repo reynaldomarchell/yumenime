@@ -4,7 +4,7 @@ export type ConsumetResponse<T> = {
   results: T[];
 };
 
-export type Recent = {
+export type RecentTypes = {
   id: string;
   episodeId: string;
   episodeNumber: number;
@@ -13,15 +13,36 @@ export type Recent = {
   url: string;
 };
 
-export type Popular = {
-  id: string;
-  title: string;
-  image: string;
-  url: string;
-  genres: string[];
-};
+// export type Popular = {
+//   id: string;
+//   title: string;
+//   image: string;
+//   url: string;
+//   genres: string[];
+// };
 
-export interface Search extends Omit<Popular, "genres"> {
+export type TrendingTypes = {
+  id: number;
+  status: string;
+  title: {
+    userPreferred: string;
+    romaji: string;
+    english: string;
+    native: string;
+  };
+  genres: string[];
+  description: string;
+  format: string;
+  bannerImage: string | null;
+  coverImage: {
+    extraLarge: string;
+    large: string;
+    medium: string;
+  };
+  season: string;
+  seasonYear: number;
+};
+export interface Search extends Omit<TrendingTypes, "genres"> {
   releaseDate: string;
   subOrDub: "sub" | "dub";
 }
@@ -35,7 +56,7 @@ export type AnimeInfo = {
   type: string;
   otherName: string;
   episodes: Episodes[];
-} & Popular;
+} & TrendingTypes;
 
 type Episodes = {
   id: string;

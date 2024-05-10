@@ -25,7 +25,7 @@ export default function RootLayout({
       <body className={`${poppins.variable} font-poppins`}>
         <div className="h-full w-full px-8 py-5">
           <MainNav />
-          <main className="py-5">{children}</main>
+          <main>{children}</main>
           <MainFooter />
         </div>
       </body>
