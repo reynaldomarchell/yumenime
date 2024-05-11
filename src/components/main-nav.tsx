@@ -7,7 +7,13 @@ export default function MainNav() {
     <>
       <nav className="flex items-center justify-between border-b pb-5">
         <Link href="/">
-          <Image src="/yumenime-logo.png" width={70} height={23} alt="logo" />
+          <Image
+            src="/yumenime-logo.png"
+            width={70}
+            height={23}
+            alt="logo"
+            className="w-20 md:w-24"
+          />
         </Link>
 
         <Search />

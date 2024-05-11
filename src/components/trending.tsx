@@ -67,7 +67,7 @@ export function Trending() {
                   {anime.genres.slice(0, 4).map((genre) => (
                     <p
                       key={genre}
-                      className="rounded-[5px] bg-gray-800 p-1 text-[7px] shadow-lg sm:text-xs"
+                      className="rounded-sm bg-gray-800 p-1 text-[7px] shadow-lg sm:text-xs"
                     >
                       {genre}
                     </p>
@@ -76,7 +76,7 @@ export function Trending() {
               </div>
               <Link
                 href={`/detail/${anime.id}`}
-                className="flex w-max cursor-pointer items-center gap-1 rounded-[5px] bg-gray-100 px-2 py-1 text-[8px] font-semibold text-black shadow-lg transition-all duration-300 ease-in-out hover:bg-gray-500 sm:text-base"
+                className="flex w-max cursor-pointer items-center gap-1 rounded-md bg-gray-100 px-2 py-1 text-[8px] font-semibold text-black shadow-lg transition-all duration-300 ease-in-out hover:bg-gray-500 sm:text-base"
               >
                 <FaPlay />
                 <p>Watch Now</p>
