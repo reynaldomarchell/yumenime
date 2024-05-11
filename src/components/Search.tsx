@@ -43,8 +43,7 @@ export default function Search() {
         result.format === "MOVIE" ||
         result.format === "OVA" ||
         result.format === "ONA" ||
-        result.format === "SPECIAL" ||
-        result.format === "MUSIC") &&
+        result.format === "SPECIAL") &&
       result.status !== "NOT_YET_RELEASED" &&
       result.status !== "CANCELLED",
   );
@@ -76,7 +75,7 @@ export default function Search() {
         </div>
         <div className="max-h-96 overflow-auto p-2">
           {searchQuery.length === 0 && (
-            <div className="flex justify-center pb-4">
+            <div className="flex justify-center py-4">
               <p>Start typing to see the results...</p>
             </div>
           )}
@@ -84,7 +83,7 @@ export default function Search() {
           {searchQuery.length > 0 &&
             filteredResults.length === 0 &&
             !loading && (
-              <div className="flex justify-center pb-4">
+              <div className="flex justify-center py-4">
                 <p>No results found...</p>
               </div>
             )}
