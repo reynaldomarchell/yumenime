@@ -1,64 +1,126 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { FaSearch } from "react-icons/fa";
 
+import { searchAnime } from "@/lib/amvstrm";
+import { SearchTypes } from "@/types";
+import { SkeletonSearch } from "./skeleton-search";
+import Image from "next/image";
+import Link from "next/link";
+
 export default function Search() {
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [searchResults, setSearchResults] = useState<SearchTypes[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!open) {
+      setSearchQuery("");
+      setSearchResults([]);
+    }
+    if (searchQuery.length > 0) {
+      setLoading(true);
+      searchAnime(searchQuery)
+        .then((data) => {
+          setSearchResults(data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error(err);
+          setLoading(false);
+        });
+    }
+  }, [searchQuery, open]);
+
+  const filteredResults = searchResults.filter(
+    (result: SearchTypes) =>
+      (result.format === "TV" ||
+        result.format === "MOVIE" ||
+        result.format === "OVA" ||
+        result.format === "ONA" ||
+        result.format === "SPECIAL" ||
+        result.format === "MUSIC") &&
+      result.status !== "NOT_YET_RELEASED" &&
+      result.status !== "CANCELLED",
+  );
+
+  function handleCloseDialog() {
+    setOpen(false);
+    setSearchQuery("");
+    setSearchResults([]);
+  }
+  // console.log(filteredResults);
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" className="flex gap-2">
+        <Button variant="outline" className="flex items-center gap-2">
           <FaSearch />
           <p className="hidden md:block">Search anime...</p>
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
-          <DialogDescription>
-            Make changes to your profile here. Click save when youre done.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Name
-            </Label>
-            <Input
-              id="name"
-              defaultValue="Pedro Duarte"
-              className="col-span-3"
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Username
-            </Label>
-            <Input
-              id="username"
-              defaultValue="@peduarte"
-              className="col-span-3"
-            />
-          </div>
+      <DialogContent className="gap-0 overflow-hidden p-0 sm:max-w-[425px]">
+        <div className="flex items-center gap-2 border-b py-1 pl-4 pr-10">
+          <FaSearch />
+          <Input
+            placeholder="Search anime..."
+            className="border-none"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
         </div>
-        <DialogFooter>
-          <Button type="submit">Save changes</Button>
-        </DialogFooter>
+        <div className="max-h-96 overflow-auto p-2">
+          {searchQuery.length === 0 && (
+            <div className="flex justify-center pb-4">
+              <p>Start typing to see the results...</p>
+            </div>
+          )}
+          {loading && <SkeletonSearch />}
+          {searchQuery.length > 0 &&
+            filteredResults.length === 0 &&
+            !loading && (
+              <div className="flex justify-center pb-4">
+                <p>No results found...</p>
+              </div>
+            )}
+          {searchQuery.length > 0 &&
+            !loading &&
+            filteredResults.map((result: SearchTypes) => (
+              <Link
+                href={`/detail/${result.id}`}
+                key={result.id}
+                onClick={handleCloseDialog}
+              >
+                <div
+                  key={result.id}
+                  className="flex items-center gap-2 rounded-md p-2 transition-colors duration-300 ease-in-out hover:bg-gray-700"
+                >
+                  <Image
+                    src={result.coverImage.large}
+                    alt={result.title.romaji}
+                    width={64}
+                    height={96}
+                    className="h-24 w-16 rounded-md object-cover"
+                  />
+                  <div className="text-muted-foreground">
+                    <p className="text-sm text-foreground">
+                      {result.title.romaji}
+                    </p>
+                    <p className="text-xs">
+                      {result.format} &#9679;{" "}
+                      {result.episodes === null ? "TBA" : result.episodes}
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+        </div>
       </DialogContent>
     </Dialog>
-    // <Input
-    //   type="search"
-    //   placeholder="Search..."
-    //   className="w-[150px] sm:w-[300px]"
-    // />
   );
 }

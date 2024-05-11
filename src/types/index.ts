@@ -10,10 +10,6 @@ export type TrendingTypes = {
     extraLarge: string;
   };
 };
-export interface Search extends Omit<TrendingTypes, "genres"> {
-  releaseDate: string;
-  subOrDub: "sub" | "dub";
-}
 
 export type RecentTypes = {
   id: string;
@@ -32,6 +28,21 @@ export type PopularTypes = {
   coverImage: {
     extraLarge: string;
   };
+};
+
+export type SearchTypes = {
+  id: number;
+  status: string;
+  title: {
+    romaji: string;
+  };
+  coverImage: {
+    extraLarge: string;
+    large: string;
+    medium: string;
+  };
+  episodes: number;
+  format: string;
 };
 
 export type AnimeInfo = {
