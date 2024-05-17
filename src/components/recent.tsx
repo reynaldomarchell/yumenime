@@ -1,4 +1,6 @@
-import * as React from "react";
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,8 +8,15 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { getRecentEpisode } from "@/lib/consumet";
 import { RecentTypes } from "@/types";
 
-export async function Recent() {
-  const recentEpisodes: RecentTypes[] = await getRecentEpisode();
+export function Recent() {
+  const [recentEpisodes, setRecentEpisodes] = useState<RecentTypes[]>([]);
+  const [imageError, setImageError] = useState(false);
+
+  useEffect(() => {
+    getRecentEpisode().then((data) => {
+      setRecentEpisodes(data);
+    });
+  }, []);
 
   // console.log(recentEpisodes);
 
@@ -23,19 +32,25 @@ export async function Recent() {
               key={episode.episodeId}
               className="flex max-w-24 shrink-0 flex-col overflow-hidden rounded-lg md:w-fit md:max-w-48"
             >
-              <div className="overflow-hidden rounded-b-lg">
+              <div className="relative overflow-hidden rounded-b-lg">
                 <Link
                   key={episode.episodeId}
                   href={`/watch/${episode.episodeId}`}
                 >
                   <Image
-                    src={episode.image}
-                    alt={episode.episodeId}
+                    src={imageError ? `/placeholder.png` : `${episode.image}`}
+                    alt={episode.title}
                     className="aspect-[2/3] object-cover transition-all duration-300 hover:scale-110"
                     priority
                     width={200}
                     height={300}
+                    onError={() => setImageError(true)}
                   />
+                  <div
+                    className={`absolute top-0 flex h-full w-full items-center justify-center object-cover px-1 text-center text-[10px] transition-all duration-300 hover:scale-110 md:px-2 md:text-xs ${imageError ? "" : " hidden"}`}
+                  >
+                    <p>{episode.title}</p>
+                  </div>
                 </Link>
               </div>
               <figcaption className="py-2 text-muted-foreground">

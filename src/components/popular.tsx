@@ -1,4 +1,6 @@
-import * as React from "react";
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,8 +8,15 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { getPopularAnime } from "@/lib/amvstrm";
 import { PopularTypes } from "@/types";
 
-export async function Popular() {
-  const popularAnime: PopularTypes[] = await getPopularAnime();
+export function Popular() {
+  const [popularAnime, setPopularAnime] = useState<PopularTypes[]>([]);
+  const [imageError, setImageError] = useState(false);
+
+  useEffect(() => {
+    getPopularAnime().then((data) => {
+      setPopularAnime(data);
+    });
+  }, []);
 
   // console.log(popularAnime);
 
@@ -23,16 +32,26 @@ export async function Popular() {
               key={anime.id}
               className="flex max-w-24 shrink-0 flex-col overflow-hidden rounded-lg md:w-fit md:max-w-48 "
             >
-              <div className="overflow-hidden rounded-b-lg">
+              <div className="relative overflow-hidden rounded-b-lg">
                 <Link key={anime.id} href={`/detail/${anime.id}`}>
                   <Image
-                    src={anime.coverImage.extraLarge}
-                    alt={`${anime.id}`}
+                    src={
+                      imageError
+                        ? `/placeholder.png`
+                        : `${anime.coverImage.extraLarge}`
+                    }
+                    alt={anime.title.romaji}
                     className="aspect-[2/3] object-cover transition-all duration-300 hover:scale-110"
                     priority
                     width={200}
                     height={300}
+                    onError={() => setImageError(true)}
                   />
+                  <div
+                    className={`absolute top-0 flex h-full w-full items-center justify-center object-cover px-1 text-center text-[10px] transition-all duration-300 hover:scale-110 md:px-2 md:text-xs ${imageError ? "" : " hidden"}`}
+                  >
+                    <p>{anime.title.romaji}</p>
+                  </div>
                 </Link>
               </div>
               <figcaption className="py-2 text-muted-foreground">
