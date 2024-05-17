@@ -27,7 +27,7 @@ export function Recent() {
       </h1>
       <ScrollArea className="max-h-fit w-full border-b pb-4">
         <div className="flex w-max space-x-4 pb-2">
-          {recentEpisodes.map((episode) => (
+          {recentEpisodes?.map((episode) => (
             <figure
               key={episode.episodeId}
               className="flex max-w-24 shrink-0 flex-col overflow-hidden rounded-lg md:w-fit md:max-w-48"

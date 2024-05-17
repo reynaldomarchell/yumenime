@@ -89,7 +89,7 @@ export default function Search() {
             )}
           {searchQuery.length > 0 &&
             !loading &&
-            filteredResults.map((result: SearchTypes) => (
+            filteredResults?.map((result: SearchTypes) => (
               <Link
                 href={`/detail/${result.id}`}
                 key={result.id}

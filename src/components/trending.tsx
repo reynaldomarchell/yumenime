@@ -31,7 +31,7 @@ export function Trending() {
       onMouseLeave={plugin.current.reset}
     >
       <CarouselContent>
-        {trendingAnime.map((anime: TrendingTypes) => (
+        {trendingAnime?.map((anime: TrendingTypes) => (
           <CarouselItem key={anime.id}>
             <Image
               src={anime.bannerImage || anime.coverImage.extraLarge}
