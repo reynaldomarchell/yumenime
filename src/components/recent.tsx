@@ -35,7 +35,7 @@ export function Recent() {
               <div className="relative overflow-hidden rounded-b-lg">
                 <Link
                   key={episode.episodeId}
-                  href={`/watch/${episode.episodeId}`}
+                  href={`/watch/${episode.episodeId}?ep=${episode.episodeNumber}`}
                 >
                   <Image
                     src={imageError ? `/placeholder.png` : `${episode.image}`}

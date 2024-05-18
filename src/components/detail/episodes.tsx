@@ -24,7 +24,10 @@ export function Episodes({ idGogo }: { idGogo: string }) {
             className="flex max-w-24 shrink-0 flex-col overflow-hidden rounded-lg md:w-fit md:max-w-48 "
           >
             <div className="relative overflow-hidden rounded-b-lg">
-              <Link key={episode.id} href={`/watch/${episode.id}`}>
+              <Link
+                key={episode.id}
+                href={`/watch/${episode.id}?ep=${episode.number}`}
+              >
                 <Image
                   src={
                     imageError ? `/placeholder.png` : `${animeEpisodes.image}`
