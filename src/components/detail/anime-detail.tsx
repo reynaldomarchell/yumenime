@@ -1,6 +1,7 @@
 import { getAnimeInfo } from "@/lib/amvstrm";
 import { InfoTypes } from "@/types";
 import { Relations } from "./relations";
+import { Episodes } from "./episodes";
 
 function getDate(date: { year: number; month: number; day: number }) {
   const months = [
@@ -75,6 +76,12 @@ export async function AnimeDetail({ animeId }: { animeId: string }) {
       </div>
       {animeInfo.relation.length > 0 && (
         <div className="flex flex-col gap-1">
+          {animeInfo?.id_provider?.idGogo && (
+            <>
+              <h1 className="pb-2 font-semibold">Episodes</h1>
+              <Episodes idGogo={animeInfo.id_provider.idGogo} />
+            </>
+          )}
           <h1 className="pb-2 font-semibold">Relations</h1>
           <Relations relatedAnime={animeInfo.relation} />
         </div>

@@ -18,7 +18,7 @@ export async function Banner({ animeId }: { animeId: string }) {
         />
         <div className="absolute top-0 z-10 h-full w-full bg-transparent bg-gradient-to-t from-gray-950" />
       </div>
-      <div className="h-14 px-4">
+      <div className="h-14 pl-4 md:pl-8">
         <div className="absolute bottom-0 z-10 flex gap-4">
           <Image
             src={animeInfo.coverImage.large}
@@ -26,7 +26,7 @@ export async function Banner({ animeId }: { animeId: string }) {
             priority
             width={200}
             height={300}
-            className="aspect-[2/3] w-20 rounded-md object-cover shadow-lg md:w-28"
+            className="aspect-[2/3] w-20 rounded-md object-cover shadow-lg md:w-40"
           />
           <div className="flex flex-col items-start justify-center gap-2">
             <h1 className="text-xs font-semibold text-foreground md:text-base">

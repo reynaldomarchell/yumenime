@@ -67,7 +67,7 @@ export type InfoTypes = {
   id: number;
   id_provider: {
     idGogo: string;
-  };
+  } | null;
   title: {
     romaji: string;
   };
@@ -106,3 +106,16 @@ export type InfoTypes = {
   }[];
   relation: RelationTypes[];
 };
+
+export type EpisodeListTypes = {
+  id: string;
+  number: number;
+};
+
+export type EpisodeInfoTypes = {
+  id: string;
+  title: string;
+  totalEpisodes: number;
+  image: string;
+  episodes: EpisodeListTypes[];
+} | null;

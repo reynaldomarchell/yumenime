@@ -12,3 +12,12 @@ export async function getRecentEpisode() {
     throw new Error(err.message);
   }
 }
+
+export async function getEpisodeInfo(animeId: string) {
+  try {
+    const { data } = await axios.get(`${url}/gogoanime/info/${animeId}`);
+    return data;
+  } catch (err: any) {
+    throw new Error(err.message);
+  }
+}
