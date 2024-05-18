@@ -26,7 +26,7 @@ export function Trending() {
   return (
     <Carousel
       plugins={[plugin.current]}
-      className="max-h-fit w-full border-b py-2 md:py-4"
+      className="relative max-h-fit w-full border-b py-2 md:py-4"
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
@@ -41,7 +41,7 @@ export function Trending() {
               priority
               className="aspect-[3/1] w-full object-cover"
             />
-            <div className="absolute top-0 z-10 h-full w-full bg-transparent bg-gradient-to-r from-gray-950"></div>
+            <div className="absolute top-0 z-10 h-full w-full bg-transparent bg-gradient-to-r from-gray-950" />
             <div className="absolute top-0 z-20 flex h-full w-max flex-col justify-around px-2 py-1 md:px-4">
               <div className="flex max-w-lg flex-col gap-2">
                 <h1 className="w-max text-xs font-semibold md:hidden">

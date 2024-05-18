@@ -8,6 +8,8 @@ export type TrendingTypes = {
   bannerImage: string | null;
   coverImage: {
     extraLarge: string;
+    large: string;
+    medium: string;
   };
 };
 
@@ -24,6 +26,8 @@ export type PopularTypes = {
   status: string;
   title: {
     romaji: string;
+    large: string;
+    medium: string;
   };
   coverImage: {
     extraLarge: string;
@@ -45,33 +49,60 @@ export type SearchTypes = {
   format: string;
 };
 
-export type AnimeInfo = {
-  totalEpisodes: number;
-  image: string;
-  releaseDate: string;
-  description: string;
-  subOrDub: "sub" | "dub";
-  type: string;
-  otherName: string;
-  episodes: Episodes[];
-} & TrendingTypes;
-
-type Episodes = {
-  id: string;
-  number: number;
-  url: string;
-};
-
-export type Watch = {
-  headers: {
-    Referer: string;
+export type RelationTypes = {
+  id: number;
+  title: {
+    romaji: string;
   };
-  sources: Source[];
-  download: string;
+  coverImage: {
+    large: string;
+    medium: string;
+  };
+  bannerImage: string | null;
+  episodes: number;
+  type: string;
 };
 
-type Source = {
-  url: string;
-  isM3U8: boolean;
-  quality: string;
+export type InfoTypes = {
+  id: number;
+  id_provider: {
+    idGogo: string;
+  };
+  title: {
+    romaji: string;
+  };
+  description: string;
+  coverImage: {
+    large: string;
+    medium: string;
+  };
+  bannerImage: string | null;
+  genres: string[];
+  tags: {
+    id: number;
+    name: string;
+  }[];
+  status: string;
+  format: string;
+  episodes: number;
+  year: number;
+  season: string;
+  duration: number;
+  startIn: {
+    year: number;
+    month: number;
+    day: number;
+  };
+  endIn: {
+    year: number;
+    month: number;
+    day: number;
+  };
+  score: {
+    decimalScore: number;
+  };
+  studios: {
+    name: string;
+  }[];
+  relation: RelationTypes[];
 };

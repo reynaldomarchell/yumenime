@@ -28,3 +28,12 @@ export async function searchAnime(query: string) {
     throw new Error(err.message);
   }
 }
+
+export async function getAnimeInfo(id: string) {
+  try {
+    const { data } = await axios.get(`${url}/v2/info/${id}`);
+    return data;
+  } catch (err: any) {
+    throw new Error(err.message);
+  }
+}

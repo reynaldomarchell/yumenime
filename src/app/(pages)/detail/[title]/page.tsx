@@ -1,10 +1,12 @@
-import Link from "next/link";
+import { AnimeDetail } from "@/components/detail/anime-detail";
+import { Banner } from "@/components/detail/banner";
 
 export default function DetailPage({ params }: { params: { title: string } }) {
-  const title = params.title;
+  const animeId = params.title;
   return (
-    <div>
-      <h1>Anime: {title}</h1>
+    <div className="flex h-full w-full flex-col">
+      <Banner animeId={animeId} />
+      <AnimeDetail animeId={animeId} />
     </div>
   );
 }
