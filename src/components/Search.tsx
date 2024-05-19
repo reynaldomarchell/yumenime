@@ -37,7 +37,7 @@ export default function Search() {
     }
   }, [searchQuery, open]);
 
-  const filteredResults = searchResults.filter(
+  const filteredResults = searchResults?.filter(
     (result: SearchTypes) =>
       (result.format === "TV" ||
         result.format === "MOVIE" ||
@@ -81,7 +81,7 @@ export default function Search() {
           )}
           {loading && <SkeletonSearch />}
           {searchQuery.length > 0 &&
-            filteredResults.length === 0 &&
+            filteredResults?.length === 0 &&
             !loading && (
               <div className="flex justify-center py-4">
                 <p>No results found...</p>
