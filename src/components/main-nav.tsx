@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import Search from "./search";
+import SearchAnime from "./search-anime";
 
 export default function MainNav() {
   return (
@@ -14,8 +14,7 @@ export default function MainNav() {
           className="w-20 md:w-24"
         />
       </Link>
-
-      <Search />
+      <SearchAnime />
     </nav>
   );
 }

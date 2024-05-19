@@ -8,11 +8,11 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { FaSearch } from "react-icons/fa";
 
-import { searchAnime } from "@/lib/amvstrm";
+import { getSearchedAnime } from "@/lib/amvstrm";
 import { SearchTypes } from "@/types";
 import { SkeletonSearch } from "./skeleton/skeleton-search";
 
-export default function Search() {
+export default function SearchAnime() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [searchResults, setSearchResults] = useState<SearchTypes[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -25,7 +25,7 @@ export default function Search() {
     }
     if (searchQuery.length > 0) {
       setLoading(true);
-      searchAnime(searchQuery)
+      getSearchedAnime(searchQuery)
         .then((data) => {
           setSearchResults(data);
           setLoading(false);

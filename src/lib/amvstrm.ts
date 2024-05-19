@@ -20,7 +20,7 @@ export async function getPopularAnime() {
   }
 }
 
-export async function searchAnime(query: string) {
+export async function getSearchedAnime(query: string) {
   try {
     const { data } = await axios.post(`${url}/v2/search`, { search: query });
     return data.results;
