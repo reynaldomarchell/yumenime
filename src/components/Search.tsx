@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
@@ -8,9 +10,7 @@ import { FaSearch } from "react-icons/fa";
 
 import { searchAnime } from "@/lib/amvstrm";
 import { SearchTypes } from "@/types";
-import { SkeletonSearch } from "./skeleton-search";
-import Image from "next/image";
-import Link from "next/link";
+import { SkeletonSearch } from "./skeleton/skeleton-search";
 
 export default function Search() {
   const [searchQuery, setSearchQuery] = useState<string>("");

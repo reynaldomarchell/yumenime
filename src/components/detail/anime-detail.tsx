@@ -45,25 +45,37 @@ export async function AnimeDetail({ animeId }: { animeId: string }) {
           <div className="flex w-max flex-col items-end  gap-1 font-medium text-gray-100">
             <p>
               <span className="text-pink-400">
-                {animeInfo.score.decimalScore}
+                {animeInfo.score.decimalScore || "-"}
               </span>{" "}
               / 10
             </p>
-            <p>{animeInfo.status}</p>
-            <p>{animeInfo.episodes}</p>
-            <p>{animeInfo.duration} mins</p>
-            <p>{animeInfo.format}</p>
+            <p>{animeInfo.status || "-"}</p>
+            <p>{animeInfo.episodes || "-"}</p>
+            <p>{animeInfo.duration ? `${animeInfo.duration} mins` : "-"}</p>
+            <p>{animeInfo.format || "-"}</p>
             <p>
               <span className="text-pink-400">
                 {animeInfo.studios.length > 0 ? animeInfo.studios[0].name : "-"}
               </span>
             </p>
-            <p>{`${animeInfo.season} ${animeInfo.year}`}</p>
-            <p>{getDate(animeInfo.startIn)}</p>
             <p>
-              {animeInfo.status === "RELEASING"
-                ? "??"
-                : getDate(animeInfo.endIn)}
+              {animeInfo.season && animeInfo.year
+                ? `${animeInfo.season} ${animeInfo.year}`
+                : "-"}
+            </p>
+            <p>
+              {animeInfo.startIn.day &&
+              animeInfo.startIn.month &&
+              animeInfo.startIn.year
+                ? getDate(animeInfo.startIn)
+                : "-"}
+            </p>
+            <p>
+              {animeInfo.endIn.day &&
+              animeInfo.endIn.month &&
+              animeInfo.endIn.year
+                ? getDate(animeInfo.endIn)
+                : "-"}
             </p>
           </div>
         </div>

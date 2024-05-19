@@ -20,7 +20,11 @@ export function Relations({ relatedAnime }: { relatedAnime: RelationTypes[] }) {
             <div className="relative overflow-hidden rounded-b-lg">
               <Link
                 key={anime.id}
-                href={anime.type !== "ANIME" ? "#" : `/detail/${anime.id}`}
+                href={
+                  anime.type !== "ANIME"
+                    ? `https://anilist.co/${anime.type}/${anime.id}`
+                    : `/detail/${anime.id}`
+                }
               >
                 <Image
                   src={
@@ -48,7 +52,7 @@ export function Relations({ relatedAnime }: { relatedAnime: RelationTypes[] }) {
               </h2>
               <p className="text-[8px] md:text-xs">
                 {anime.type === "ANIME"
-                  ? `${anime.type} | ${anime.episodes}`
+                  ? `${anime.type} | ${anime.episodes || "-"}`
                   : anime.type}
               </p>
             </figcaption>
