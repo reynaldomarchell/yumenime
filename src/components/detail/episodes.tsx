@@ -26,7 +26,7 @@ export function Episodes({ idGogo }: { idGogo: string }) {
             <div className="relative overflow-hidden rounded-b-lg">
               <Link
                 key={episode.id}
-                href={`/watch/${episode.id}?ep=${episode.number}`}
+                href={`/watch/${episode.id}?id=${animeEpisodes.id}&ep=${episode.number}`}
               >
                 <Image
                   src={

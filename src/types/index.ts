@@ -119,3 +119,17 @@ export type EpisodeInfoTypes = {
   image: string;
   episodes: EpisodeListTypes[];
 } | null;
+
+export type SourcesTypes = {
+  url: string;
+  isM3U8: boolean;
+  quality: string;
+};
+
+export type StreamingTypes = {
+  headers: {
+    Referer: string;
+  };
+  sources: SourcesTypes[];
+  download: string;
+};

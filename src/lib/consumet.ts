@@ -13,9 +13,18 @@ export async function getRecentEpisode() {
   }
 }
 
-export async function getEpisodeInfo(animeId: string) {
+export async function getEpisodeInfo(animeId: string | null) {
   try {
     const { data } = await axios.get(`${url}/gogoanime/info/${animeId}`);
+    return data;
+  } catch (err: any) {
+    throw new Error(err.message);
+  }
+}
+
+export async function getStreamingLinks(episodeId: string) {
+  try {
+    const { data } = await axios.get(`${url}/gogoanime/watch/${episodeId}`);
     return data;
   } catch (err: any) {
     throw new Error(err.message);
