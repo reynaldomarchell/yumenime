@@ -1,9 +1,9 @@
 "use client";
 
-import { RelationTypes } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { RelationTypes } from "@/types";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 export function Relations({ relatedAnime }: { relatedAnime: RelationTypes[] }) {

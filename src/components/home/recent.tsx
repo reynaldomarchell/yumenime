@@ -7,16 +7,21 @@ import Link from "next/link";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { getRecentEpisode } from "@/lib/consumet";
 import { RecentTypes } from "@/types";
+import { SkeletonSlider } from "../skeleton/skeleton-slider";
 
 export function Recent() {
   const [recentEpisodes, setRecentEpisodes] = useState<RecentTypes[]>([]);
   const [imageError, setImageError] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getRecentEpisode().then((data) => {
       setRecentEpisodes(data);
+      setLoading(false);
     });
   }, []);
+
+  if (loading) return <SkeletonSlider />;
 
   // console.log(recentEpisodes);
 

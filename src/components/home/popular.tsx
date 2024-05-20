@@ -7,16 +7,21 @@ import Link from "next/link";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { getPopularAnime } from "@/lib/amvstrm";
 import { PopularTypes } from "@/types";
+import { SkeletonSlider } from "../skeleton/skeleton-slider";
 
 export function Popular() {
   const [popularAnime, setPopularAnime] = useState<PopularTypes[]>([]);
   const [imageError, setImageError] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getPopularAnime().then((data) => {
       setPopularAnime(data);
+      setLoading(false);
     });
   }, []);
+
+  if (loading) return <SkeletonSlider />;
 
   // console.log(popularAnime);
 

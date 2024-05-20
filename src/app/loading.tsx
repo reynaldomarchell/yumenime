@@ -6,6 +6,7 @@ export default function Loading() {
     <div>
       <SkeletonBanner />
       <SkeletonSlider />
+      <SkeletonSlider />
     </div>
   );
 }

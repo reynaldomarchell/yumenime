@@ -13,15 +13,22 @@ import { FaPlay } from "react-icons/fa";
 
 import { getTrendingAnime } from "@/lib/amvstrm";
 import { TrendingTypes } from "@/types";
+import { SkeletonBanner } from "../skeleton/skeleton-banner";
 
 export function Trending() {
   const plugin = useRef(Autoplay({ delay: 3000, stopOnInteraction: false }));
 
   const [trendingAnime, setTrendingAnime] = useState<TrendingTypes[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getTrendingAnime().then((data) => setTrendingAnime(data));
+    getTrendingAnime().then((data) => {
+      setTrendingAnime(data);
+      setLoading(false);
+    });
   }, []);
+
+  if (loading) return <SkeletonBanner />;
 
   return (
     <Carousel

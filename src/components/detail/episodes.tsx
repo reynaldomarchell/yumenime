@@ -6,14 +6,21 @@ import { useEffect, useState } from "react";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { EpisodeInfoTypes, EpisodeListTypes } from "@/types";
 import { getEpisodeInfo } from "@/lib/consumet";
+import { SkeletonSlider } from "../skeleton/skeleton-slider";
 
 export function Episodes({ idGogo }: { idGogo: string }) {
   const [animeEpisodes, setAnimeEpisodes] = useState<EpisodeInfoTypes>();
   const [imageError, setImageError] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getEpisodeInfo(idGogo).then((data) => setAnimeEpisodes(data));
+    getEpisodeInfo(idGogo).then((data) => {
+      setAnimeEpisodes(data);
+      setLoading(false);
+    });
   }, [idGogo]);
+
+  if (loading) return <SkeletonSlider />;
 
   return (
     <ScrollArea className="max-h-fit w-full pb-4">
