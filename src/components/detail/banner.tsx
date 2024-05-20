@@ -36,7 +36,6 @@ export function Banner({ animeId }: { animeId: string }) {
           <Image
             src={animeInfo.coverImage.large}
             alt={animeInfo.title.romaji}
-            priority
             width={200}
             height={300}
             className="aspect-[2/3] w-20 rounded-md object-cover shadow-lg md:w-40"

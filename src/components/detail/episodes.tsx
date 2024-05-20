@@ -34,7 +34,6 @@ export function Episodes({ idGogo }: { idGogo: string }) {
                   }
                   alt={episode.id}
                   className="aspect-[2/3] object-cover transition-all duration-300 hover:scale-110"
-                  priority
                   width={200}
                   height={300}
                   onError={() => setImageError(true)}
