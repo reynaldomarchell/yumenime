@@ -1,9 +1,22 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { getAnimeInfo } from "@/lib/amvstrm";
 import { InfoTypes } from "@/types";
 
-export async function Banner({ animeId }: { animeId: string }) {
-  const animeInfo: InfoTypes = await getAnimeInfo(animeId);
+export function Banner({ animeId }: { animeId: string }) {
+  const [animeInfo, setAnimeInfo] = useState<InfoTypes>({} as InfoTypes);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getAnimeInfo(animeId).then((data) => {
+      setAnimeInfo(data);
+      setLoading(false);
+    });
+  }, [animeId]);
+
+  if (loading) return;
 
   return (
     <div className="relative">

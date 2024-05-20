@@ -1,7 +1,11 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { getAnimeInfo } from "@/lib/amvstrm";
 import { InfoTypes } from "@/types";
 import { Relations } from "./relations";
 import { Episodes } from "./episodes";
+import SkeletonDetail from "../skeleton/skeleton-detail";
 
 function getDate(date: { year: number; month: number; day: number }) {
   const months = [
@@ -24,8 +28,18 @@ function getDate(date: { year: number; month: number; day: number }) {
   return formattedDate;
 }
 
-export async function AnimeDetail({ animeId }: { animeId: string }) {
-  const animeInfo: InfoTypes = await getAnimeInfo(animeId);
+export function AnimeDetail({ animeId }: { animeId: string }) {
+  const [animeInfo, setAnimeInfo] = useState<InfoTypes>({} as InfoTypes);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getAnimeInfo(animeId).then((data) => {
+      setAnimeInfo(data);
+      setLoading(false);
+    });
+  }, [animeId]);
+
+  if (loading) return <SkeletonDetail />;
 
   return (
     <div className="flex flex-col gap-4">

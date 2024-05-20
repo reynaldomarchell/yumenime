@@ -3,6 +3,7 @@ import { AnimeDetail } from "@/components/detail/anime-detail";
 
 export default function DetailPage({ params }: { params: { title: string } }) {
   const animeId = params.title;
+
   return (
     <div className="flex h-full w-full flex-col">
       <Banner animeId={animeId} />
