@@ -17,10 +17,12 @@ export function EpisodeList() {
   }, [animeId]);
 
   return (
-    <div className="mb-4 h-72 md:h-dvh md:w-1/4">
+    <div className="mb-4 h-72 md:h-dvh md:w-[40%]">
       <div className="flex h-full flex-col gap-2 divide-y border p-2 shadow-lg">
         <h1 className="font-bold text-foreground">
-          {animeInfo?.title ? animeInfo.title : "Loading..."}
+          {animeInfo?.title
+            ? `${animeInfo.title} - Episode ${episodeNumber}`
+            : "Loading..."}
         </h1>
         <div className="flex flex-col gap-2 overflow-auto px-5 py-2 text-center font-semibold">
           {animeInfo?.episodes.map((episode) => (
@@ -31,7 +33,7 @@ export function EpisodeList() {
               <p
                 className={`rounded-sm px-2 py-1 shadow-lg transition-all duration-300 ease-in-out ${
                   episode.number === Number(episodeNumber)
-                    ? "border border-gray-200 bg-gray-800 text-white"
+                    ? "border border-gray-500 bg-gray-800 text-white"
                     : "bg-gray-200 text-black hover:bg-gray-400"
                 }`}
               >

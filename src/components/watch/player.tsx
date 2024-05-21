@@ -31,7 +31,7 @@ export function Player({ episodeId }: { episodeId: string }) {
   };
 
   return (
-    <div className="mb-4 flex flex-col gap-2 md:w-3/4">
+    <div className="mb-4 flex flex-col gap-2 md:w-[60%]">
       {isClient ? (
         <div className="aspect-video border  object-cover shadow-lg">
           <ReactPlayer
@@ -62,9 +62,9 @@ export function Player({ episodeId }: { episodeId: string }) {
             onClick={() => handleQualityChange(source.quality)}
             className={`${
               quality === source.quality
-                ? "border border-gray-200 bg-gray-800 text-white"
-                : "bg-gray-200 text-black"
-            } rounded-md px-2 py-1 text-xs md:text-sm`}
+                ? "border border-gray-500 bg-gray-800 text-white"
+                : "bg-gray-200 text-black hover:bg-gray-400"
+            } rounded-md px-2 py-1 text-xs shadow-lg transition-all duration-300 ease-in-out md:text-sm`}
           >
             {source.quality}
           </button>
