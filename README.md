@@ -2,7 +2,7 @@
 
 ![alt text](image.png)
 
-YumeNime is short for "夢 (Yume = Dream)" and "Anime" is an anime streaming website powered by [Consumet](https://github.com/consumet/api.consumet.org) and [amvstrm](https://github.com/amvstrm/api) API. You can watch all kind of anime for free without ads on any screen size.
+YumeNime is short for "夢" (Yume = Dream), and "Anime" is an anime streaming website powered by [Consumet](https://github.com/consumet/api.consumet.org) and [amvstrm](https://github.com/amvstrm/api) API. You can watch all kinds of anime for free without ads on any screen size.
 
 > The design of this app is inspired from [anirohi](https://github.com/gneiru/anirohi.git)
 
