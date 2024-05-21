@@ -96,22 +96,26 @@ export function AnimeDetail({ animeId }: { animeId: string }) {
         <div className="flex flex-col gap-1 md:w-1/2 md:py-4 md:pl-4">
           <h1 className="font-semibold">Synopsis</h1>
           <p className="text-xs md:text-sm">
-            {animeInfo.description.replace(/(<([^>]+)>)/gi, "")}
+            {animeInfo.description
+              ? animeInfo.description?.replace(/(<([^>]+)>)/gi, "")
+              : "-"}
           </p>
         </div>
       </div>
-      {animeInfo.relation.length > 0 && (
-        <div className="flex flex-col gap-1">
-          {animeInfo?.id_provider?.idGogo && (
-            <>
-              <h1 className="pb-2 font-semibold">Episodes</h1>
-              <Episodes idGogo={animeInfo.id_provider.idGogo} />
-            </>
-          )}
-          <h1 className="pb-2 font-semibold">Relations</h1>
-          <Relations relatedAnime={animeInfo.relation} />
-        </div>
-      )}
+      <div className="flex flex-col gap-1">
+        {animeInfo?.id_provider?.idGogo && (
+          <>
+            <h1 className="pb-2 font-semibold">Episodes</h1>
+            <Episodes idGogo={animeInfo.id_provider.idGogo} />
+          </>
+        )}
+        {animeInfo.relation.length > 0 && (
+          <>
+            <h1 className="pb-2 font-semibold">Relations</h1>
+            <Relations relatedAnime={animeInfo.relation} />
+          </>
+        )}
+      </div>
     </div>
   );
 }
