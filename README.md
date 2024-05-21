@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🌙 YumeNime
 
-## Getting Started
+![alt text](image.png)
 
-First, run the development server:
+YumeNime is short for "夢 (Yume = Dream)" and "Anime" is an anime streaming website powered by [Consumet](https://github.com/consumet/api.consumet.org) and [amvstrm](https://github.com/amvstrm/api) API. You can watch all kind of anime for free without ads on any screen size.
+
+> The design of this app is inspired from [anirohi](https://github.com/gneiru/anirohi.git)
+
+### Tools that used in this app
+
+- Next.js
+- TypeScript
+- Tailwind CSS
+- shadcn/ui
+- React Player
+
+## Installation
+
+1. Clone this repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone https://github.com/reynaldomarchell/yumenime.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2.  Go to the project directory and open VS Code
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  cd yumenime
+  code .
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. Change `.env.example` to `.env.local`, then fill in your API key
 
-## Learn More
+```bash
+  # Input your amvstrm and Consumet API key here
+  NEXT_PUBLIC_AMVSTRM =
+  NEXT_PUBLIC_CONSUMET =
+```
 
-To learn more about Next.js, take a look at the following resources:
+4. Install the dependencies and run the app
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+  npm i
+  npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+5. App will run on http://localhost:3000
