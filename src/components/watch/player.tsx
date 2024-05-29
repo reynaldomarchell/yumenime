@@ -1,55 +1,68 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
-import ReactPlayer from "react-player";
-import { getStreamingLinks } from "@/lib/consumet";
-import { StreamingTypes } from "@/types";
+import { getStreamingLinks, getEpisodeInfo } from "@/lib/consumet";
+import { EpisodeInfoTypes, StreamingTypes } from "@/types";
+import {
+  MediaPlayer,
+  MediaPlayerInstance,
+  MediaProvider,
+  useStore,
+} from "@vidstack/react";
+import "@vidstack/react/player/styles/base.css";
 
 export function Player({ episodeId }: { episodeId: string }) {
-  const [isClient, setIsClient] = useState(false);
+  const searchParams = useSearchParams();
+  const animeId = searchParams.get("id");
+  const [animeInfo, setAnimeInfo] = useState<EpisodeInfoTypes>();
   const [episodeData, setEpisodeData] = useState<StreamingTypes>();
+  const [isClient, setIsClient] = useState(false);
   const [quality, setQuality] = useState<string>("default");
-  const playerRef = useRef<ReactPlayer | null>(null);
   const [timestamp, setTimestamp] = useState<number>(0);
+  const ref = useRef<MediaPlayerInstance>(null),
+    { currentTime } = useStore(MediaPlayerInstance, ref);
 
   useEffect(() => {
     getStreamingLinks(episodeId).then((data) => setEpisodeData(data));
+    getEpisodeInfo(animeId).then((data) => setAnimeInfo(data));
     setIsClient(true);
-  }, [episodeId]);
+  }, [episodeId, animeId]);
 
   useEffect(() => {
-    if (playerRef.current) {
-      playerRef.current.seekTo(timestamp);
+    if (currentTime) {
+      setTimestamp(currentTime);
     }
   }, [quality]);
 
   const handleQualityChange = (newQuality: string) => {
-    if (playerRef.current) {
-      setTimestamp(playerRef.current.getCurrentTime());
+    if (ref.current) {
+      ref.current.currentTime = timestamp;
     }
     setQuality(newQuality);
   };
 
+  // console.log({ episodeId, episodeData, animeInfo, quality, timestamp });
+
   return (
     <div className="mb-4 flex flex-col gap-2 md:w-[60%]">
       {isClient ? (
-        <div className="aspect-video border  object-cover shadow-lg">
-          <ReactPlayer
-            ref={playerRef}
-            url={
+        <div className="aspect-video object-cover shadow-lg">
+          <MediaPlayer
+            className="ring-media-focus bg-slate-900 data-[focus]:ring-4"
+            ref={ref}
+            title={episodeId}
+            src={
               episodeData?.sources.find((source) => source.quality === quality)
                 ?.url
             }
             controls={true}
-            width="100%"
-            height="100%"
-            light={true}
-            onProgress={(progress) => {
-              if (progress.playedSeconds > 0) {
-                setTimestamp(progress.playedSeconds);
-              }
-            }}
-          />
+            playsInline
+            poster={animeInfo?.image}
+            currentTime={timestamp}
+          >
+            <MediaProvider />
+          </MediaPlayer>
         </div>
       ) : (
         <p>Loading video...</p>

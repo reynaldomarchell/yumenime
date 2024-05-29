@@ -23,9 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${poppins.variable} font-poppins`}>
-        <div className="h-full w-full px-8 py-5">
+        <div className="flex h-dvh w-full flex-col">
           <MainNav />
-          <main>{children}</main>
+          <main className="h-dvh overflow-auto">{children}</main>
           <MainFooter />
         </div>
       </body>

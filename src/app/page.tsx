@@ -4,7 +4,7 @@ import { Popular } from "@/components/home/popular";
 
 export default function Home() {
   return (
-    <div className="flex h-full w-full flex-col">
+    <div className="h-full w-full px-8">
       <Trending />
       <Recent />
       <Popular />

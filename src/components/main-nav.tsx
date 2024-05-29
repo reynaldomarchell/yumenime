@@ -4,15 +4,17 @@ import SearchAnime from "./search-anime";
 
 export default function MainNav() {
   return (
-    <nav className="flex items-center justify-between border-b pb-2 md:pb-5">
+    <nav className="flex items-center justify-between border-b px-8 py-2 md:py-4">
       <Link href="/">
-        <Image
-          src="/yumenime-logo.png"
-          width={70}
-          height={23}
-          alt="logo"
-          className="w-20 md:w-24"
-        />
+        <div className="rounded-md px-1 py-2 transition-all duration-300 ease-in hover:bg-gray-800">
+          <Image
+            src="/yumenime-logo.png"
+            width={70}
+            height={23}
+            alt="logo"
+            className="w-16 md:w-20"
+          />
+        </div>
       </Link>
       <SearchAnime />
     </nav>

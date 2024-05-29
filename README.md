@@ -12,7 +12,7 @@ YumeNime is short for "夢" (Yume = Dream), and "Anime" is an anime streaming we
 - TypeScript
 - Tailwind CSS
 - shadcn/ui
-- React Player
+- Vidstack Player
 
 ## Installation
 

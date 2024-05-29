@@ -17,27 +17,27 @@ export function EpisodeList() {
   }, [animeId]);
 
   return (
-    <div className="mb-4 h-72 md:h-dvh md:w-[40%]">
+    <div className="h-72 md:h-96 md:w-[40%]">
       <div className="flex h-full flex-col gap-2 divide-y border p-2 shadow-lg">
-        <h1 className="font-bold text-foreground">
+        <h1 className="font-bold text-foreground shadow-lg">
           {animeInfo?.title
             ? `${animeInfo.title} - Episode ${episodeNumber}`
             : "Loading..."}
         </h1>
-        <div className="flex flex-col gap-2 overflow-auto px-5 py-2 text-center font-semibold">
+        <div className="grid grid-cols-4 gap-2 overflow-auto px-5 py-2 text-center font-semibold md:grid-cols-6">
           {animeInfo?.episodes.map((episode) => (
             <Link
               key={episode.id}
               href={`/watch/${episode.id}?id=${animeInfo.id}&ep=${episode.number}`}
             >
               <p
-                className={`rounded-sm px-2 py-1 shadow-lg transition-all duration-300 ease-in-out ${
+                className={`rounded-sm p-1 shadow-lg transition-all duration-300 ease-in-out ${
                   episode.number === Number(episodeNumber)
                     ? "border border-gray-500 bg-gray-800 text-white"
                     : "bg-gray-200 text-black hover:bg-gray-400"
                 }`}
               >
-                Episode {episode.number}
+                {episode.number}
               </p>
             </Link>
           ))}
