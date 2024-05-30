@@ -18,10 +18,10 @@ export function Player({ episodeId }: { episodeId: string }) {
   const [animeInfo, setAnimeInfo] = useState<EpisodeInfoTypes>();
   const [episodeData, setEpisodeData] = useState<StreamingTypes>();
   const [isClient, setIsClient] = useState(false);
+
   const [quality, setQuality] = useState<string>("default");
   const [timestamp, setTimestamp] = useState<number>(0);
-  const ref = useRef<MediaPlayerInstance>(null),
-    { currentTime } = useStore(MediaPlayerInstance, ref);
+  const player = useRef<MediaPlayerInstance>(null);
 
   useEffect(() => {
     getStreamingLinks(episodeId).then((data) => setEpisodeData(data));
@@ -30,15 +30,12 @@ export function Player({ episodeId }: { episodeId: string }) {
   }, [episodeId, animeId]);
 
   useEffect(() => {
-    if (currentTime) {
-      setTimestamp(currentTime);
+    if (player.current) {
+      player.current.currentTime = timestamp;
     }
   }, [quality]);
 
   const handleQualityChange = (newQuality: string) => {
-    if (ref.current) {
-      ref.current.currentTime = timestamp;
-    }
     setQuality(newQuality);
   };
 
@@ -50,7 +47,7 @@ export function Player({ episodeId }: { episodeId: string }) {
         <div className="aspect-video object-cover shadow-lg">
           <MediaPlayer
             className="ring-media-focus bg-slate-900 data-[focus]:ring-4"
-            ref={ref}
+            ref={player}
             title={episodeId}
             src={
               episodeData?.sources.find((source) => source.quality === quality)
@@ -59,7 +56,9 @@ export function Player({ episodeId }: { episodeId: string }) {
             controls={true}
             playsInline
             poster={animeInfo?.image}
+            autoPlay={true}
             currentTime={timestamp}
+            onProgress={(e) => setTimestamp(player.current!.currentTime)}
           >
             <MediaProvider />
           </MediaPlayer>
