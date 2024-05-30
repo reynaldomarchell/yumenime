@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = `${process.env.NEXT_PUBLIC_AMVSTRM}`;
+const url = `${process.env.NEXT_PUBLIC_AMVSTRM}/api`;
 
 export async function getTrendingAnime() {
   try {
