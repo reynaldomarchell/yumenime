@@ -46,18 +46,18 @@ export function Player({ episodeId }: { episodeId: string }) {
       {isClient ? (
         <div className="aspect-video object-cover shadow-lg">
           <MediaPlayer
-            className="ring-media-focus bg-slate-900 data-[focus]:ring-4"
             ref={player}
             title={episodeId}
+            className=" bg-slate-900"
+            poster={animeInfo?.image}
+            controls={true}
+            autoPlay={true}
+            currentTime={timestamp}
+            playsInline
             src={
               episodeData?.sources.find((source) => source.quality === quality)
                 ?.url
             }
-            controls={true}
-            playsInline
-            poster={animeInfo?.image}
-            autoPlay={true}
-            currentTime={timestamp}
             onProgress={(e) => setTimestamp(player.current!.currentTime)}
           >
             <MediaProvider />
