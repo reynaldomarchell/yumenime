@@ -25,7 +25,7 @@ export function Recomendations({ animeId }: { animeId: string }) {
   if (loading) return <SkeletonSlider />;
 
   return (
-    <div>
+    <div className="flex flex-col gap-1">
       {recomendations.length > 0 && (
         <>
           <h1 className="pb-2 font-semibold">Recomendations</h1>
