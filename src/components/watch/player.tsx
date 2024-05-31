@@ -21,7 +21,9 @@ export function Player({ episodeId }: { episodeId: string }) {
 
   const [quality, setQuality] = useState<string>("default");
   const [timestamp, setTimestamp] = useState<number>(0);
-  const player = useRef<MediaPlayerInstance>(null);
+  // const player = useRef<MediaPlayerInstance>(null);
+  const player = useRef<MediaPlayerInstance>(null),
+    { currentTime } = useStore(MediaPlayerInstance, player);
 
   useEffect(() => {
     getStreamingLinks(episodeId).then((data) => setEpisodeData(data));
@@ -30,8 +32,11 @@ export function Player({ episodeId }: { episodeId: string }) {
   }, [episodeId, animeId]);
 
   useEffect(() => {
-    if (player.current) {
-      player.current.currentTime = timestamp;
+    // if (player.current) {
+    //   player.current.currentTime = timestamp;
+    // }
+    if (currentTime) {
+      setTimestamp(currentTime);
     }
   }, [quality]);
 
@@ -39,7 +44,7 @@ export function Player({ episodeId }: { episodeId: string }) {
     setQuality(newQuality);
   };
 
-  // console.log({ episodeId, episodeData, animeInfo, quality, timestamp });
+  console.log({ timestamp });
 
   return (
     <div className="mb-4 flex flex-col gap-2 md:w-[60%]">
@@ -58,7 +63,7 @@ export function Player({ episodeId }: { episodeId: string }) {
               episodeData?.sources.find((source) => source.quality === quality)
                 ?.url
             }
-            onProgress={(e) => setTimestamp(player.current!.currentTime)}
+            // onProgress={(e) => setTimestamp(player.current!.currentTime)}
           >
             <MediaProvider />
           </MediaPlayer>
