@@ -37,3 +37,12 @@ export async function getAnimeInfo(id: string) {
     throw new Error(err.message);
   }
 }
+
+export async function getRecomendations(id: string) {
+  try {
+    const { data } = await axios.get(`${url}/v2/recommendations/${id}`);
+    return data.results;
+  } catch (err: any) {
+    throw new Error(err.message);
+  }
+}

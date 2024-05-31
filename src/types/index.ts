@@ -62,6 +62,7 @@ export type RelationTypes = {
   bannerImage: string | null;
   episodes: number;
   type: string;
+  format: string;
 };
 
 export type InfoTypes = {
@@ -107,6 +108,22 @@ export type InfoTypes = {
     name: string;
   }[];
   relation: RelationTypes[];
+};
+
+export type RecomendationTypes = {
+  id: number;
+  title: {
+    romaji: string;
+  };
+  coverImage: {
+    large: string;
+    medium: string;
+  };
+  bannerImage: string | null;
+  episodes: number;
+  type: string;
+  format: string;
+  status: string;
 };
 
 export type EpisodeListTypes = {

@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import { getAnimeInfo } from "@/lib/amvstrm";
 import { InfoTypes } from "@/types";
-import { Relations } from "./relations";
 import { Episodes } from "./episodes";
+import { Relations } from "./relations";
+import { Recomendations } from "./recomendations";
 import SkeletonDetail from "../skeleton/skeleton-detail";
 
 function getDate(date: { year: number; month: number; day: number }) {
@@ -156,6 +157,7 @@ export function AnimeDetail({ animeId }: { animeId: string }) {
             <Relations relatedAnime={animeInfo.relation} />
           </>
         )}
+        <Recomendations animeId={animeId} />
       </div>
     </div>
   );

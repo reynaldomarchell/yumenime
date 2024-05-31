@@ -51,7 +51,7 @@ export function Relations({ relatedAnime }: { relatedAnime: RelationTypes[] }) {
               </h2>
               <p className="text-[8px] md:text-xs">
                 {anime.type === "ANIME"
-                  ? `${anime.type} | ${anime.episodes || "-"}`
+                  ? `${anime.format} | ${anime.episodes || "-"}`
                   : anime.type}
               </p>
             </figcaption>
