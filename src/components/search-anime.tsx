@@ -45,7 +45,8 @@ export default function SearchAnime() {
         result.format === "ONA" ||
         result.format === "SPECIAL") &&
       result.status !== "NOT_YET_RELEASED" &&
-      result.status !== "CANCELLED",
+      result.status !== "CANCELLED" &&
+      result.genres.filter((genre) => genre === "Hentai").length === 0,
   );
 
   function handleCloseDialog() {
@@ -53,7 +54,6 @@ export default function SearchAnime() {
     setSearchQuery("");
     setSearchResults([]);
   }
-  // console.log(filteredResults);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>

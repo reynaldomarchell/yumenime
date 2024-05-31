@@ -31,10 +31,13 @@ function getDate(date: { year: number; month: number; day: number }) {
 export function AnimeDetail({ animeId }: { animeId: string }) {
   const [animeInfo, setAnimeInfo] = useState<InfoTypes>({} as InfoTypes);
   const [loading, setLoading] = useState(true);
+  const [episodesidGogo, setEpisodesidGogo] = useState<string>("");
+  const [isDub, setIsDub] = useState<boolean>(false);
 
   useEffect(() => {
     getAnimeInfo(animeId).then((data) => {
       setAnimeInfo(data);
+      setEpisodesidGogo(data?.id_provider?.idGogo);
       setLoading(false);
     });
   }, [animeId]);
@@ -103,11 +106,49 @@ export function AnimeDetail({ animeId }: { animeId: string }) {
         </div>
       </div>
       <div className="flex flex-col gap-1">
-        {animeInfo?.id_provider?.idGogo && (
+        {animeInfo?.id_provider?.idGogo && animeInfo?.id_provider?.idGogoDub ? (
           <>
-            <h1 className="pb-2 font-semibold">Episodes</h1>
-            <Episodes idGogo={animeInfo.id_provider.idGogo} />
+            <h1 className="pb-2 font-semibold">
+              Episodes {isDub ? "(Dub)" : "(Sub)"}
+            </h1>
+            <div className="flex items-center gap-2 pb-2">
+              <button
+                onClick={() =>
+                  setEpisodesidGogo(animeInfo?.id_provider?.idGogo || "")
+                }
+                className={`${
+                  !isDub
+                    ? "border border-gray-500 bg-gray-800 text-white"
+                    : "bg-gray-200 text-black hover:bg-gray-400"
+                } rounded-md px-2 py-1 text-xs shadow-lg transition-all duration-300 ease-in-out md:text-sm`}
+              >
+                Sub
+              </button>
+              <button
+                onClick={() =>
+                  setEpisodesidGogo(animeInfo?.id_provider?.idGogoDub || "")
+                }
+                className={`${
+                  isDub
+                    ? "border border-gray-500 bg-gray-800 text-white"
+                    : "bg-gray-200 text-black hover:bg-gray-400"
+                } rounded-md px-2 py-1 text-xs shadow-lg transition-all duration-300 ease-in-out md:text-sm`}
+              >
+                Dub
+              </button>
+            </div>
+            <Episodes idGogo={episodesidGogo} setIsDub={setIsDub} />
           </>
+        ) : (
+          animeInfo?.id_provider?.idGogo && (
+            <>
+              <h1 className="pb-2 font-semibold">Episodes (Sub)</h1>
+              <Episodes
+                idGogo={animeInfo.id_provider.idGogo}
+                setIsDub={setIsDub}
+              />
+            </>
+          )
         )}
         {animeInfo.relation.length > 0 && (
           <>

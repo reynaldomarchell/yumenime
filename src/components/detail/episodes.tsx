@@ -2,13 +2,19 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { EpisodeInfoTypes, EpisodeListTypes } from "@/types";
 import { getEpisodeInfo } from "@/lib/consumet";
 import { SkeletonSlider } from "../skeleton/skeleton-slider";
 
-export function Episodes({ idGogo }: { idGogo: string }) {
+export function Episodes({
+  idGogo,
+  setIsDub,
+}: {
+  idGogo: string;
+  setIsDub: Dispatch<SetStateAction<boolean>>;
+}) {
   const [animeEpisodes, setAnimeEpisodes] = useState<EpisodeInfoTypes>();
   const [imageError, setImageError] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -16,9 +22,10 @@ export function Episodes({ idGogo }: { idGogo: string }) {
   useEffect(() => {
     getEpisodeInfo(idGogo).then((data) => {
       setAnimeEpisodes(data);
+      setIsDub(data?.subOrDub === "dub" ? true : false);
       setLoading(false);
     });
-  }, [idGogo]);
+  }, [idGogo, setIsDub]);
 
   if (loading) return <SkeletonSlider />;
 

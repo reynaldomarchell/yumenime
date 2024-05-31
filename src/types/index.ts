@@ -46,6 +46,7 @@ export type SearchTypes = {
     medium: string;
   };
   episodes: number;
+  genres: string[];
   format: string;
 };
 
@@ -67,6 +68,7 @@ export type InfoTypes = {
   id: number;
   id_provider: {
     idGogo: string;
+    idGogoDub: string;
   } | null;
   title: {
     romaji: string;
@@ -117,6 +119,7 @@ export type EpisodeInfoTypes = {
   title: string;
   totalEpisodes: number;
   image: string;
+  subOrDub: string;
   episodes: EpisodeListTypes[];
 } | null;
 
