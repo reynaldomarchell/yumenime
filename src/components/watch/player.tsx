@@ -44,7 +44,7 @@ export function Player({ episodeId }: { episodeId: string }) {
     setQuality(newQuality);
   };
 
-  console.log({ timestamp });
+  // console.log({ timestamp });
 
   return (
     <div className="mb-4 flex flex-col gap-2 md:w-[60%]">
