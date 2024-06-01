@@ -7,6 +7,8 @@ import { Episodes } from "./episodes";
 import { Relations } from "./relations";
 import { Recomendations } from "./recomendations";
 import SkeletonDetail from "../skeleton/skeleton-detail";
+import { MediaPlayer, MediaProvider } from "@vidstack/react";
+import "@vidstack/react/player/styles/base.css";
 
 function getDate(date: { year: number; month: number; day: number }) {
   const months = [
@@ -106,13 +108,32 @@ export function AnimeDetail({ animeId }: { animeId: string }) {
           </p>
         </div>
       </div>
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-2 md:gap-4">
+        {animeInfo.trailer?.id && (
+          <div>
+            <h1 className="pb-2 font-semibold">Trailer</h1>
+            <div className="flex w-full items-center justify-center">
+              <div className="aspect-video w-full object-cover shadow-lg md:w-1/2">
+                <MediaPlayer
+                  className="bg-slate-900"
+                  title={animeInfo.title.romaji}
+                  poster={animeInfo.bannerImage || animeInfo.coverImage.large}
+                  controls={true}
+                  playsInline
+                  src={`youtube/${animeInfo.trailer.id}`}
+                >
+                  <MediaProvider />
+                </MediaPlayer>
+              </div>
+            </div>
+          </div>
+        )}
         {animeInfo?.id_provider?.idGogo && animeInfo?.id_provider?.idGogoDub ? (
-          <>
+          <div>
             <h1 className="pb-2 font-semibold">
               Episodes {isDub ? "(Dub)" : "(Sub)"}
             </h1>
-            <div className="flex items-center gap-2 pb-2">
+            <div className="flex items-center gap-2 pb-4">
               <button
                 onClick={() =>
                   setEpisodesidGogo(animeInfo?.id_provider?.idGogo || "")
@@ -139,23 +160,23 @@ export function AnimeDetail({ animeId }: { animeId: string }) {
               </button>
             </div>
             <Episodes idGogo={episodesidGogo} setIsDub={setIsDub} />
-          </>
+          </div>
         ) : (
           animeInfo?.id_provider?.idGogo && (
-            <>
+            <div>
               <h1 className="pb-2 font-semibold">Episodes (Sub)</h1>
               <Episodes
                 idGogo={animeInfo.id_provider.idGogo}
                 setIsDub={setIsDub}
               />
-            </>
+            </div>
           )
         )}
         {animeInfo.relation.length > 0 && (
-          <>
+          <div>
             <h1 className="pb-2 font-semibold">Relations</h1>
             <Relations relatedAnime={animeInfo.relation} />
-          </>
+          </div>
         )}
         <Recomendations animeId={animeId} />
       </div>

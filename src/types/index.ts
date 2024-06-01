@@ -104,6 +104,9 @@ export type InfoTypes = {
   score: {
     decimalScore: number;
   };
+  trailer: {
+    id: string;
+  } | null;
   studios: {
     name: string;
   }[];
