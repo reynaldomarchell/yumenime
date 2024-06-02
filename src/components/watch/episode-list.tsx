@@ -31,7 +31,7 @@ export function EpisodeList() {
               href={`/watch/${episode.id}?id=${animeInfo.id}&ep=${episode.number}`}
             >
               <p
-                className={`rounded-sm p-1 shadow-lg transition-all duration-300 ease-in-out ${
+                className={` p-1 shadow-lg transition-all duration-300 ease-in-out ${
                   episode.number === Number(episodeNumber)
                     ? "border border-gray-500 bg-gray-800 text-white"
                     : "bg-gray-200 text-black hover:bg-gray-400"

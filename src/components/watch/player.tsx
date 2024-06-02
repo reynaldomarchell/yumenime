@@ -11,6 +11,7 @@ import {
   useStore,
 } from "@vidstack/react";
 import "@vidstack/react/player/styles/base.css";
+import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 
 export function Player({ episodeId }: { episodeId: string }) {
   const searchParams = useSearchParams();
@@ -19,6 +20,7 @@ export function Player({ episodeId }: { episodeId: string }) {
   const [episodeData, setEpisodeData] = useState<StreamingTypes>();
   const [isClient, setIsClient] = useState(false);
 
+  const [qualityOpen, setQualityOpen] = useState(false);
   const [quality, setQuality] = useState<string>("default");
   const [timestamp, setTimestamp] = useState<number>(0);
   // const player = useRef<MediaPlayerInstance>(null);
@@ -71,21 +73,40 @@ export function Player({ episodeId }: { episodeId: string }) {
       ) : (
         <p>Loading video...</p>
       )}
-      <h2 className="text-sm text-foreground md:text-base">Choose Quality :</h2>
-      <div className="flex flex-wrap gap-2">
-        {episodeData?.sources.map((source) => (
+      <div className="flex w-full items-center gap-4">
+        <h2 className="text-sm font-medium text-foreground md:text-base">
+          Quality
+        </h2>
+        <div className="relative w-max ">
           <button
-            key={source.quality}
-            onClick={() => handleQualityChange(source.quality)}
-            className={`${
-              quality === source.quality
-                ? "border border-gray-500 bg-gray-800 text-white"
-                : "bg-gray-200 text-black hover:bg-gray-400"
-            } rounded-md px-2 py-1 text-xs shadow-lg transition-all duration-300 ease-in-out md:text-sm`}
+            onClick={() => setQualityOpen(!qualityOpen)}
+            className="flex items-center gap-2  border px-4 py-2 text-sm text-foreground shadow-lg transition-all duration-300 ease-in-out hover:bg-slate-800 md:text-base"
           >
-            {source.quality}
+            <p>{quality}</p>
+            {qualityOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
           </button>
-        ))}
+
+          {qualityOpen && (
+            <div className="absolute top-10 z-20 flex w-full flex-col bg-slate-900 shadow-lg">
+              {episodeData?.sources.map((source) => (
+                <button
+                  key={source.quality}
+                  onClick={() => {
+                    handleQualityChange(source.quality);
+                    setQualityOpen(false);
+                  }}
+                  className={`${
+                    quality === source.quality
+                      ? "border-gray-800 bg-gray-800 text-white"
+                      : "border-gray-300 bg-gray-200 text-black hover:bg-gray-400"
+                  } border-y px-2 py-1 text-xs shadow-lg transition-all duration-300 ease-in-out md:text-sm`}
+                >
+                  {source.quality}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
