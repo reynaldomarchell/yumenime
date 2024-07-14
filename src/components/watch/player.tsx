@@ -47,7 +47,7 @@ export function Player({ episodeId }: { episodeId: string }) {
   };
 
   return (
-    <div className="mb-4 flex flex-col gap-2 md:w-[60%]">
+    <div className="mb-4 flex h-max flex-col gap-2 md:w-[60%]">
       {isClient ? (
         <div className="aspect-video object-cover shadow-lg">
           <MediaPlayer
@@ -78,7 +78,7 @@ export function Player({ episodeId }: { episodeId: string }) {
         <div className="relative w-max ">
           <button
             onClick={() => setQualityOpen(!qualityOpen)}
-            className="flex items-center gap-2  border px-4 py-2 text-sm text-foreground shadow-lg transition-all duration-300 ease-in-out hover:bg-slate-800 md:text-base"
+            className="flex items-center gap-2  border px-4 py-2 text-sm text-foreground shadow-lg transition-all duration-300 ease-in-out md:text-base"
           >
             <p>{quality}</p>
             {qualityOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}

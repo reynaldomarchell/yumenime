@@ -9,27 +9,12 @@ export default function MainFooter() {
             href="https://github.com/reynaldomarchell/yumenime.git"
             className="transition-colors hover:text-violet-500"
           >
-            <p className="text-md flex items-center justify-center gap-2">
+            <p className="flex items-center justify-center gap-2 text-base">
               YumeNime
               <SiGithub />
             </p>
           </a>
-          <p className="text-xs">
-            Powered by{" "}
-            <a
-              href="https://github.com/amvstrm/api.git"
-              className="transition-colors hover:text-violet-500"
-            >
-              amvstrm
-            </a>{" "}
-            and{" "}
-            <a
-              href="https://github.com/consumet/api.consumet.org.git"
-              className="transition-colors hover:text-violet-500"
-            >
-              Consumet
-            </a>
-          </p>
+          <p className="text-sm">Made with ❤️ for you</p>
         </div>
       </div>
     </footer>

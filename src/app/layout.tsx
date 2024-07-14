@@ -25,8 +25,10 @@ export default function RootLayout({
       <body className={`${poppins.variable} font-poppins`}>
         <div className="flex h-dvh w-full flex-col">
           <MainNav />
-          <main className="h-dvh overflow-auto">{children}</main>
-          <MainFooter />
+          <main className="h-full overflow-auto">
+            {children}
+            <MainFooter />
+          </main>
         </div>
       </body>
     </html>

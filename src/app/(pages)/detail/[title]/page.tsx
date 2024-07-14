@@ -5,7 +5,7 @@ export default function DetailPage({ params }: { params: { title: string } }) {
   const animeId = params.title;
 
   return (
-    <div className="flex h-dvh w-full flex-col px-8">
+    <div className="flex w-full flex-col px-8">
       <Banner animeId={animeId} />
       <AnimeDetail animeId={animeId} />
     </div>
