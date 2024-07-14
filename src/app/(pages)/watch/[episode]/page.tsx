@@ -9,7 +9,7 @@ export default function EpisodePage({
   const episodeId = params.episode;
 
   return (
-    <div className="flex h-dvh w-full flex-col gap-2 px-8 py-2 md:flex-row md:py-4">
+    <div className="flex h-full w-full flex-col gap-2 px-8 py-2 md:flex-row md:py-4">
       <Player episodeId={episodeId} />
       <EpisodeList />
     </div>
