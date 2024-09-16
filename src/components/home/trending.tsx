@@ -61,17 +61,17 @@ export function Trending() {
                   {anime.title.romaji}
                 </h1>
                 <p className="max-w-md text-[8px] sm:hidden">
-                  {anime.description.length > 60
-                    ? `${anime.description.slice(0, 61).replace(/(<([^>]+)>)/gi, "")}...`
-                    : anime.description.replace(/(<([^>]+)>)/gi, "")}
+                  {anime.description?.length > 60
+                    ? `${anime.description?.slice(0, 61).replace(/(<([^>]+)>)/gi, "")}...`
+                    : anime.description?.replace(/(<([^>]+)>)/gi, "")}
                 </p>
                 <p className="hidden text-xs sm:block">
-                  {anime.description.length > 200
-                    ? `${anime.description.slice(0, 201).replace(/(<([^>]+)>)/gi, "")}...`
-                    : anime.description.replace(/(<([^>]+)>)/gi, "")}
+                  {anime.description?.length > 200
+                    ? `${anime.description?.slice(0, 201).replace(/(<([^>]+)>)/gi, "")}...`
+                    : anime.description?.replace(/(<([^>]+)>)/gi, "")}
                 </p>
                 <div className="flex w-max gap-1">
-                  {anime.genres.slice(0, 4).map((genre) => (
+                  {anime.genres?.slice(0, 4).map((genre) => (
                     <p
                       key={genre}
                       className="rounded-sm bg-gray-800 p-1 text-[7px] shadow-lg sm:text-xs"
