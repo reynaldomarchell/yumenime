@@ -23,7 +23,7 @@ export async function getPopularAnime() {
 export async function getSearchedAnime(query: string) {
   try {
     const { data } = await axios.post(
-      `https://yumenime-api1.vercel.app/api/v2/search`,
+      `https://amvstrm-api1.vercel.app/api/v2/search`,
       { search: query },
     );
     return data.results;
