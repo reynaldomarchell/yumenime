@@ -37,7 +37,7 @@ export async function getAnimeInfo(id: string) {
     const { data } = await axios.get(`${url}/v2/info/${id}`);
     return data;
   } catch (err: any) {
-    throw new Error(err.message);
+    return null;
   }
 }
 

@@ -18,12 +18,14 @@ export function Banner({ animeId }: { animeId: string }) {
 
   if (loading) return;
 
+  if (!animeInfo) return;
+
   return (
     <div className="relative">
       <div className="relative max-h-fit w-full py-2 md:py-4">
         <Image
-          src={animeInfo.bannerImage || animeInfo.coverImage.large}
-          alt={animeInfo.title.romaji}
+          src={animeInfo?.bannerImage || animeInfo?.coverImage.large}
+          alt={animeInfo?.title.romaji}
           width={1000}
           height={500}
           priority
@@ -34,18 +36,18 @@ export function Banner({ animeId }: { animeId: string }) {
       <div className="h-14 pl-4 md:pl-8">
         <div className="absolute bottom-0 z-10 flex gap-4">
           <Image
-            src={animeInfo.coverImage.large}
-            alt={animeInfo.title.romaji}
+            src={animeInfo?.coverImage.large}
+            alt={animeInfo?.title.romaji}
             width={200}
             height={300}
             className="aspect-[2/3] w-20 rounded-md object-cover shadow-lg md:w-40"
           />
           <div className="flex flex-col items-start justify-center gap-2">
             <h1 className="text-xs font-semibold text-foreground md:text-base">
-              {animeInfo.title.romaji}
+              {animeInfo?.title.romaji}
             </h1>
             <div className="flex flex-wrap gap-1 md:gap-2">
-              {animeInfo.genres.map((genre) => (
+              {animeInfo?.genres.map((genre) => (
                 <span
                   key={genre}
                   className="rounded-md bg-gray-800 px-1 py-1 text-[8px] font-medium text-muted-foreground md:px-2 md:text-xs"
