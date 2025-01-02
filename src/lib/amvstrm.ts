@@ -22,10 +22,7 @@ export async function getPopularAnime() {
 
 export async function getSearchedAnime(query: string) {
   try {
-    const { data } = await axios.post(
-      `https://amvstrm-api1.vercel.app/api/v2/search`,
-      { search: query },
-    );
+    const { data } = await axios.post(`${url}/v2/search`, { search: query });
     return data.results;
   } catch (err: any) {
     throw new Error(err.message);
